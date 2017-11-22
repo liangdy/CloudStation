@@ -12,7 +12,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.cloud.station"
+        applicationId "com.cloud"
         minSdkVersion 21
         targetSdkVersion 22
         versionCode 1

@@ -1,4 +1,4 @@
-package com.cloud.station;
+package com.cloud;
 
 import org.junit.Test;
 
