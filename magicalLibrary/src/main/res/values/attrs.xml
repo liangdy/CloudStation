@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RippleView">
+        <attr name="rv_alpha" format="integer" />
+        <attr name="rv_rippleDuration" format="integer" />
+        <attr name="rv_zoomDuration" format="integer" />
+        <attr name="rv_rippleColor" format="color" />
+        <attr name="rv_pressColor" format="color" />
+        <attr name="rv_centered" format="boolean" />
+        <attr name="rv_pressBgType" format="enum">
+            <enum name="rect" value="0" />
+            <enum name="circleFitMin" value="1" />
+            <enum name="circleFitMax" value="2" />
+        </attr>
+        <attr name="rv_ripplePadding" format="dimension" />
+        <attr name="rv_zoom" format="boolean" />
+        <attr name="rv_zoomScale" format="float" />
+        <attr name="rv_pressBgEnable" format="boolean" />
+        <attr name="rv_holdBgInPressing" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FilletBtView">
+        <attr name="fillet" format="dimension" />
+        <attr name="defaultColor" format="color" />
+        <attr name="pressedColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="MagicalRecyclerView">
+        <attr name="mrv_divider" format="reference|color" />
+        <attr name="mrv_dividerVertical" format="reference|color" />
+        <attr name="mrv_dividerHorizontal" format="reference|color" />
+        <attr name="mrv_dividerHeight" format="dimension" />
+        <attr name="mrv_dividerVerticalHeight" format="dimension" />
+        <attr name="mrv_dividerHorizontalHeight" format="dimension" />
+        <attr name="mrv_itemViewBothSidesMargin" format="dimension" />
+        <attr name="mrv_emptyView" format="reference" />
+        <attr name="mrv_isEmptyViewKeepShowHeadOrFooter" format="boolean" />
+        <attr name="mrv_layoutManager" format="enum">
+            <enum name="linear" value="0" />
+            <enum name="grid" value="1" />
+            <enum name="staggeredGrid" value="2" />
+        </attr>
+        <attr name="mrv_layoutManagerOrientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="mrv_spanCount" format="integer" />
+        <attr name="mrv_isReverseLayout" format="boolean" />
+        <attr name="mrv_headerDividersEnabled" format="boolean" />
+        <attr name="mrv_footerDividersEnabled" format="boolean" />
+        <attr name="mrv_isNotShowGridEndDivider" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PtrFrameLayout">
+        <!-- Optional. If you put header and content in xml, you can you these to specify them. -->
+        <attr name="ptr_header" format="reference" />
+        <attr name="ptr_content" format="reference" />
+
+        <!-- the resistance when you are moving the frame -->
+        <attr name="ptr_resistance" format="float" />
+
+        <!-- the ration of the height of the header to trigger refresh -->
+        <attr name="ptr_ratio_of_header_height_to_refresh" format="float" />
+
+        <attr name="ptr_duration_to_close" format="integer" />
+        <attr name="ptr_duration_to_close_header" format="integer" />
+
+        <!-- pull to refresh, otherwise release to refresh, default is release to refresh -->
+        <attr name="ptr_pull_to_fresh" format="boolean" />
+
+        <!-- keep header when refreshing-->
+        <attr name="ptr_keep_header_when_refresh" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PtrClassicHeader">
+        <attr name="ptr_rotate_ani_time" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleAngleTitleView">
+        <attr name="radiusOfCorner" format="dimension" />
+        <attr name="frameWidth" format="dimension" />
+        <attr name="backColor" format="color" />
+        <attr name="frameColor" format="color" />
+    </declare-styleable>
+
+    <!-- SmartTabLayout -->
+    <declare-styleable name="stl_SmartTabLayout">
+        <attr name="stl_indicatorAlwaysInCenter" format="boolean" />
+        <attr name="stl_indicatorInFront" format="boolean" />
+        <attr name="stl_indicatorInterpolation" format="enum">
+            <enum name="smart" value="0" />
+            <enum name="linear" value="1" />
+        </attr>
+        <attr name="stl_indicatorColor" format="color" />
+        <attr name="stl_indicatorColors" format="reference" />
+        <attr name="stl_indicatorThickness" format="dimension" />
+        <attr name="stl_indicatorCornerRadius" format="dimension" />
+        <attr name="stl_underlineColor" format="color" />
+        <attr name="stl_underlineThickness" format="dimension" />
+        <attr name="stl_dividerColor" format="color" />
+        <attr name="stl_dividerColors" format="reference" />
+        <attr name="stl_dividerThickness" format="dimension" />
+        <attr name="stl_defaultTabTextAllCaps" format="boolean" />
+        <attr name="stl_defaultTabTextColor" format="color" />
+        <attr name="stl_defaultTabTextSize" format="dimension" />
+        <attr name="stl_defaultTabTextHorizontalPadding" format="dimension" />
+        <attr name="stl_defaultTabTextMinWidth" format="dimension" />
+        <attr name="stl_customTabTextLayoutId" format="reference" />
+        <attr name="stl_customTabTextViewId" format="reference" />
+        <attr name="stl_distributeEvenly" format="boolean" />
+    </declare-styleable>
+</resources>

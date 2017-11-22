@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DialogDefaultWindowTitle">
+        <item name="android:textSize">@dimen/dialog_default_title_text_size
+        </item>
+        <item name="android:textColor">@color/dialog_default_text_color</item>
+    </style>
+
+    <style name="DialogDefaultStyleParent" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+    <style name="DialogDefaultStyle" parent="DialogDefaultStyleParent">
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

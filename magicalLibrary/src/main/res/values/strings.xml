@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MagicalLibrary</string>
+
+    <string name="cube_ptr_pull_down">下拉</string>
+    <string name="cube_ptr_pull_down_to_refresh">下拉刷新</string>
+    <string name="cube_ptr_release_to_refresh">释放刷新</string>
+    <string name="cube_ptr_refreshing">加载中...</string>
+    <string name="cube_ptr_refresh_complete">更新完成.</string>
+    <string name="cube_ptr_last_update">上次更新:&#160;</string>
+    <string name="cube_ptr_seconds_ago">&#160;秒之前</string>
+    <string name="cube_ptr_minutes_ago">&#160;分钟之前</string>
+    <string name="cube_ptr_hours_ago">&#160;小时之前</string>
+
+    <string name="mrv_def_load_more_view_status_normal">松开加载更多</string>
+    <string name="mrv_def_load_more_view_status_loading">加载数据中，请稍等...</string>
+    <string name="mrv_def_load_more_view_status_error">加载失败，请重试</string>
+    <!-- 加载更多View显示相关文字 -->
+    <string name="load_more_normal">松开加载更多</string>
+    <string name="load_more_loading">加载数据中，请稍等...</string>
+    <string name="load_more_error">加载失败，请重试</string>
+</resources>

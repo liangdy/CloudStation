@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.magical.library.view.ripple.RippleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:rv_rippleColor="#10000000"
+    app:rv_zoomDuration="1000">
+
+    <ImageView
+        android:id="@+id/item_nav_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_music" />
+
+    <TextView
+        android:id="@+id/item_nav_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/item_nav_icon"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</com.magical.library.view.ripple.RippleRelativeLayout>

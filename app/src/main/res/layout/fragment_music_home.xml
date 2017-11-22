@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.magical.library.view.smartlayout.SmartTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_height"
+        android:background="@color/green"
+        app:stl_defaultTabTextColor="@android:color/white"
+        app:stl_defaultTabTextHorizontalPadding="@dimen/fragment_common_list_smart_tab_padding"
+        app:stl_defaultTabTextSize="@dimen/text_size_16"
+        app:stl_distributeEvenly="true"
+        app:stl_dividerColor="@android:color/transparent"
+        app:stl_dividerThickness="0dp"
+        app:stl_indicatorColor="@color/common_list_smart_tab_underline_color"
+        app:stl_indicatorCornerRadius="@dimen/fragment_common_list_smart_tab_indicator_radius"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="@dimen/fragment_common_list_smart_tab_indicator_height"
+        app:stl_underlineColor="@android:color/transparent" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

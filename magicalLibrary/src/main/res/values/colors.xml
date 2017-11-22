@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rippelColor">#ffffff</color>
+    <color name="pressColor">#ffffff</color>
+
+    <color name="blue_3eabfe">#3eabfe</color>
+    <color name="blue_1E90FF">#1E90FF</color>
+</resources>

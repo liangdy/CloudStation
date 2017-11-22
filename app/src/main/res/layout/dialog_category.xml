@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/category"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <com.magical.library.view.recycler.MagicalRecyclerView
+            android:id="@+id/category_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:mrv_divider="@color/colorLightGray"
+            app:mrv_dividerHeight="1px"
+            app:mrv_isEmptyViewKeepShowHeadOrFooter="true"
+            app:mrv_layoutManager="linear"
+            app:mrv_layoutManagerOrientation="vertical" />
+
+    </LinearLayout>
+</FrameLayout>

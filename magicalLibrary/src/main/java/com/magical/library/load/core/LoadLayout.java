@@ -1,0 +1,82 @@
+package com.magical.library.load.core;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.widget.FrameLayout;
+
+import com.magical.library.load.LoadUtil;
+import com.magical.library.load.callback.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Project: CloudStation
+ * FileName: LoadLayout.java
+ * Description:
+ * Creator: ldy
+ * Email: 1020118243@qq.com
+ * Crete Date: 10/3/17 8:02 PM
+ * Editor: ldy
+ * Modify Date: 10/3/17 8:02 PM
+ * Remark:
+ */
+public class LoadLayout extends FrameLayout {
+    private Map<Class<? extends Callback>, Callback> callbacks = new HashMap<>();
+    private Context context;
+    private Callback.OnReloadListener onReloadListener;
+
+    public LoadLayout(@NonNull Context context) {
+        super(context);
+    }
+
+    public LoadLayout(@NonNull Context context, Callback.OnReloadListener onReloadListener) {
+        this(context);
+        this.context = context;
+        this.onReloadListener = onReloadListener;
+    }
+
+    public void setupCallback(Callback callback) {
+        Callback cloneCallback = callback.copy();
+        cloneCallback.setCallback(null, context, onReloadListener);
+        addCallback(cloneCallback);
+    }
+
+    public void addCallback(Callback callback) {
+        if (!callbacks.containsKey(callback.getClass())) {
+            callbacks.put(callback.getClass(), callback);
+        }
+    }
+
+    public void showCallback(final Class<? extends Callback> callback) {
+        if (!callbacks.containsKey(callback)) {
+            throw new IllegalArgumentException(String.format("The Callback (%s) is nonexistent.", callback
+                    .getSimpleName()));
+        }
+        if (LoadUtil.isMainThread()) {
+            showCallbackView(callback);
+        } else {
+            postToMainThread(callback);
+        }
+    }
+
+    private void postToMainThread(final Class<? extends Callback> status) {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                showCallbackView(status);
+            }
+        });
+    }
+
+    private void showCallbackView(Class<? extends Callback> status) {
+        if (getChildCount() > 0) {
+            removeAllViews();
+        }
+        for (Class key : callbacks.keySet()) {
+            if (key == status) {
+                addView(callbacks.get(key).getRootView());
+            }
+        }
+    }
+}

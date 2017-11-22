@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_click_bg"
+    android:clickable="true">
+
+    <com.magical.library.view.CircleAngleTitleView
+        android:id="@+id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:clickable="false"
+        android:gravity="center"
+        android:text="@string/all"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14"
+        app:frameColor="@color/white"
+        app:frameWidth="1px"
+        app:radiusOfCorner="0.01px" />
+</FrameLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <array name="nav_array">
+        <item>音乐专区</item>
+        <item>视频专区</item>
+        <item>图片专区</item>
+        <item>资讯专区</item>
+    </array>
+
+    <array name="music_array">
+        <item>推荐</item>
+        <item>歌单</item>
+        <item>榜单</item>
+        <item>我的</item>
+    </array>
+
+    <array name="local_music_array">
+        <item>单曲</item>
+        <item>歌手</item>
+        <item>专辑</item>
+        <item>文件夹</item>
+    </array>
+</resources>

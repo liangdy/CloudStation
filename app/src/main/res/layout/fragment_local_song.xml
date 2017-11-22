@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.magical.library.view.recycler.MagicalRecyclerView
+        android:id="@+id/song_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:mrv_divider="@color/transparent"
+        app:mrv_dividerHeight="1px"
+        app:mrv_layoutManager="linear"
+        app:mrv_layoutManagerOrientation="vertical" />
+
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="60sp" />
+
+    <com.cloud.view.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginBottom="56dp"
+        android:layout_marginTop="56dp"
+        android:visibility="gone" />
+</FrameLayout>

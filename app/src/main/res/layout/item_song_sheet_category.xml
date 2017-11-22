@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/green" />
+
+        <TextView
+            android:id="@+id/category_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="@string/music_category_type_text" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLightGray" />
+
+    <com.magical.library.view.recycler.MagicalRecyclerView
+        android:id="@+id/recd_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layoutManager=""
+        app:mrv_divider="@color/colorLightGray"
+        app:mrv_dividerHeight="1px"
+        app:mrv_isEmptyViewKeepShowHeadOrFooter="true"
+        app:mrv_layoutManager="grid"
+        app:mrv_layoutManagerOrientation="vertical"
+        app:mrv_spanCount="3" />
+</LinearLayout>

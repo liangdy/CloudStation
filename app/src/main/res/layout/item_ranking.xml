@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <com.magical.library.view.XImageView
+        android:id="@+id/rank_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="12dp"
+        app:actualImageScaleType="centerCrop"
+        app:failureImage="@drawable/default_music_cover"
+        app:failureImageScaleType="centerCrop"
+        app:placeholderImage="@drawable/default_music_cover"
+        app:placeholderImageScaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/icon_more" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/arrow_iv"
+        android:layout_toRightOf="@id/rank_iv"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/song_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/song_tv2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/song_tv3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/text_size_12" />
+
+    </LinearLayout>
+</RelativeLayout>
