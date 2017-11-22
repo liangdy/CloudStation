@@ -21,7 +21,7 @@ interface IMediaService {
         int getPlayState();
         int getPlayMode();
         void setPlayMode(int mode);
-        void sendPlayStateBrocast();
+        void sendPlayStateBroacast();
         void exit();
         int getCurMusicId();
         int getBufferProgress();
