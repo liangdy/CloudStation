@@ -1,1 +1,1 @@
-include ':app', ':magicalLibrary'
+include ':app', ':magicalLibrary', ':ijkplayer'
