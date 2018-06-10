@@ -100,6 +100,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+
+        <service
+            android:name="com.cloud.service.AudioPlayService"
+            android:exported="true"
+            android:process=":audioPlay">
+            <intent-filter>
+                <action android:name="com.cloud.service.AudioPlayService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

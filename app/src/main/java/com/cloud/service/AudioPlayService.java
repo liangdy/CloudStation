@@ -75,7 +75,7 @@ public class AudioPlayService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        
+
     }
 
     private void updateNotification(Bitmap bitmap, String title, String name) {
@@ -177,23 +177,23 @@ public class AudioPlayService extends IntentService {
         }
 
         @Override
-        public boolean pause() throws RemoteException {
-            return mService.get().mController.pause();
+        public void pause() throws RemoteException {
+            mService.get().mController.pause();
         }
 
         @Override
-        public boolean prev() throws RemoteException {
-            return mService.get().mController.prev();
+        public void prev() throws RemoteException {
+            mService.get().mController.prev();
         }
 
         @Override
-        public boolean next() throws RemoteException {
-            return mService.get().mController.next();
+        public void next() throws RemoteException {
+            mService.get().mController.next();
         }
 
         @Override
-        public boolean play(int pos) throws RemoteException {
-            return mService.get().mController.play(pos);
+        public void play(int pos) throws RemoteException {
+            mService.get().mController.play(pos);
         }
 
         @Override
@@ -252,8 +252,8 @@ public class AudioPlayService extends IntentService {
         }
 
         @Override
-        public boolean rePlay() throws RemoteException {
-            return mService.get().mController.replay();
+        public void rePlay() throws RemoteException {
+            mService.get().mController.replay();
         }
 
         @Override
@@ -277,8 +277,8 @@ public class AudioPlayService extends IntentService {
         }
 
         @Override
-        public boolean playById(int id) throws RemoteException {
-            return mService.get().mController.playById(id);
+        public void playById(int id) throws RemoteException {
+            mService.get().mController.playById(id);
         }
 
         @Override

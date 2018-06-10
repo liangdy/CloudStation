@@ -2,6 +2,7 @@ package com.cloud.ui.music.play;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +18,10 @@ import com.cloud.ui.BaseActivity;
 import com.cloud.view.PlayerSeekBar;
 import com.cloud.view.XViewPager;
 import com.cloud.view.lrc.LrcView;
+import com.magical.library.imageloader.ImageLoader;
+import com.magical.library.utils.EncryptUtils;
+import com.magical.library.utils.StatusBarUtils;
+import com.magical.library.view.XImageView;
 
 import javax.inject.Inject;
 
@@ -40,7 +45,7 @@ public class PlayActivity extends BaseActivity implements PlayContract.View {
     @Inject
     PlayPresenter mPresenter;
     @BindView(R.id.album_art_iv)
-    ImageView albumArtIv;
+    XImageView albumArtIv;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.view_pager)
@@ -95,6 +100,7 @@ public class PlayActivity extends BaseActivity implements PlayContract.View {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtils.setStatusBarFromImg(this, ContextCompat.getColor(this, R.color.transparent));
     }
 
     @Override
@@ -118,7 +124,9 @@ public class PlayActivity extends BaseActivity implements PlayContract.View {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mPresenter.onBack();
+                    if (mPresenter != null) {
+                        mPresenter.onBack();
+                    }
                 }
             });
         }
@@ -131,12 +139,16 @@ public class PlayActivity extends BaseActivity implements PlayContract.View {
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
     }
 
     @Override
     public void initialized() {
-
+        if (mPresenter != null) {
+            ImageLoader.loadBlurImage(albumArtIv, mPresenter.getCurMusic().pic_url, EncryptUtils.getMD5(mPresenter.getCurMusic().pic_url), 60f);
+        }
     }
 
     @Override

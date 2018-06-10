@@ -2,9 +2,11 @@ package com.cloud.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.cloud.ui.guide.GuideActivity;
 import com.cloud.ui.main.MainActivity;
+import com.cloud.ui.music.play.PlayActivity;
 
 /**
  * Project: CloudStation
@@ -38,8 +40,25 @@ public class ActivityUtils {
      *
      * @param mContext
      */
-    public static void goMainActivity(Context mContext) {
+    public static void goMainActivity(Context mContext, Bundle bundle) {
         Intent intent = new Intent(mContext, MainActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
+
+    /**
+     * 播放页
+     *
+     * @param mContext
+     * @param bundle
+     */
+    public static void goPlayActivity(Context mContext, Bundle bundle) {
+        Intent intent = new Intent(mContext, PlayActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         mContext.startActivity(intent);
     }
 }

@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.magical.library.view.XImageView
         android:id="@+id/album_art_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/play_bg" />
+        app:actualImageScaleType="centerCrop"
+        app:failureImage="@drawable/play_bg"
+        app:failureImageScaleType="centerCrop"
+        app:placeholderImage="@drawable/play_bg"
+        app:placeholderImageScaleType="centerCrop"
+        app:roundAsCircle="true" />
 
     <View
         android:layout_width="match_parent"

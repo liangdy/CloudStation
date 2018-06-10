@@ -52,7 +52,7 @@ public class StartPresenter implements StartContract.Presenter {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
-        ActivityUtils.goMainActivity(mActivity);
+        ActivityUtils.goMainActivity(mActivity, null);
         mActivity.finish();
     }
 

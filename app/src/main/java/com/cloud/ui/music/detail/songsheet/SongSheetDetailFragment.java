@@ -157,7 +157,9 @@ public class SongSheetDetailFragment extends BaseFragment implements SongSheetDe
 
             @Override
             public void itemClick(ContentBean bean) {
-
+                if (mPresenter != null) {
+                    mPresenter.doPlay(bean);
+                }
             }
         });
     }

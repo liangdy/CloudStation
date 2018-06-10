@@ -8,6 +8,7 @@ import com.cloud.model.music.LastfmArtist;
 import com.cloud.model.music.Music;
 import com.cloud.model.music.RankBean;
 import com.cloud.model.music.RankDetail;
+import com.cloud.model.music.SongInfo;
 import com.cloud.model.music.SongSheet;
 import com.cloud.model.music.SongSheetCategory;
 import com.cloud.model.music.SongSheetDetail;
@@ -63,4 +64,7 @@ public interface CloudService {
 
     @GET("2.0/")
     Observable<LastfmArtist> getArtistInfo(@QueryMap Map<String, String> params);
+
+    @GET("ting")
+    Observable<SongInfo> getSongInfo(@QueryMap Map<String, String> params);
 }

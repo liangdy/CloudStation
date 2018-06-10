@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 
+import com.cloud.api.CloudApi;
 import com.cloud.model.music.ContentBean;
+import com.cloud.model.music.SongInfo;
 import com.cloud.utils.Constants;
 import com.cloud.utils.LogUtils;
 import com.cloud.utils.MusicUtils;
@@ -16,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
@@ -69,7 +76,7 @@ public class AudioPlayController implements IMediaPlayer.OnCompletionListener, I
         mMediaPlayer.setOnSeekCompleteListener(this);
     }
 
-    public boolean play(int pos) {
+    public void play(int pos) {
         if (mCurPlayIndex == pos) {
             if (!mMediaPlayer.isPlaying()) {
                 mMediaPlayer.start();
@@ -78,15 +85,13 @@ public class AudioPlayController implements IMediaPlayer.OnCompletionListener, I
             } else {
                 pause();
             }
-            return true;
+        } else {
+            prepare(pos);
+            replay();
         }
-        if (!prepare(pos)) {
-            return false;
-        }
-        return replay();
     }
 
-    public boolean playById(long id) {
+    public void playById(long id) {
         int position = MusicUtils.seekPosInListById(mMusicList, id);
         mCurPlayIndex = position;
         if (mCurMusicId == id) {
@@ -97,28 +102,34 @@ public class AudioPlayController implements IMediaPlayer.OnCompletionListener, I
             } else {
                 pause();
             }
-            return true;
+        } else {
+            prepare(position);
+            replay();
         }
-        if (!prepare(position)) {
-            return false;
-        }
-        return replay();
     }
 
-    public boolean replay() {
+    public void replay() {
         if (mPlayState == Constants.PLAY_STATUE_INVALID || mPlayState == Constants.PLAY_STATUE_NO_FILE) {
-            return false;
+            return;
         }
         mMediaPlayer.start();
         mPlayState = Constants.PLAY_STATUE_PLAYING;
         sendPlayStateBroadcast();
-        return true;
     }
 
-    public boolean prepare(final int pos) {
+    public void prepare(final int pos) {
         mCurPlayIndex = pos;
         mMediaPlayer.reset();
         String path = mMusicList.get(pos).localUrl;
+        if (!TextUtils.isEmpty(path)) {
+            prepare(path);
+        } else {
+            String song_id = mMusicList.get(pos).song_id;
+            prepareById(song_id);
+        }
+    }
+
+    private void prepare(String path) {
         try {
             mMediaPlayer.setDataSource(path);
             mMediaPlayer.prepareAsync();
@@ -129,47 +140,77 @@ public class AudioPlayController implements IMediaPlayer.OnCompletionListener, I
             MagicalLog.e(TAG, e.toString());
             LogUtils.saveLog(null, e);
             mPlayState = Constants.PLAY_STATUE_INVALID;
-            if (pos < mMusicList.size()) {
-                playById(Long.valueOf(mMusicList.get(pos + 1).song_id));
+            if (mCurPlayIndex < mMusicList.size()) {
+                playById(Long.valueOf(mMusicList.get(mCurPlayIndex + 1).song_id));
             }
-            return false;
+            return;
         }
         sendPlayStateBroadcast();
-        return true;
     }
 
-    public boolean pause() {
+    Disposable mDisposable;
+
+    private void prepareById(String song_id) {
+        CloudApi.getSongInfo(song_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mDisposable = disposable;
+                    }
+                }).subscribe(new Consumer<SongInfo>() {
+            @Override
+            public void accept(SongInfo songInfo) throws Exception {
+                String file_link = songInfo.bitrate.file_link;
+                String pic_url = songInfo.songinfo.pic_big;
+                String lrc_url = songInfo.songinfo.lrclink;
+                mMusicList.get(mCurPlayIndex).localUrl = file_link;
+                mMusicList.get(mCurPlayIndex).pic_url = pic_url;
+                mMusicList.get(mCurPlayIndex).lrc_url = lrc_url;
+                prepare(file_link);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                System.out.println("throwable------>" + throwable);
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                if (mDisposable != null && !mDisposable.isDisposed()) {
+                    mDisposable.dispose();
+                }
+            }
+        });
+    }
+
+    public void pause() {
         if (mPlayState != Constants.PLAY_STATUE_PLAYING) {
-            return false;
+            return;
         }
         mMediaPlayer.pause();
         mPlayState = Constants.PLAY_STATUE_PAUSE;
         sendPlayStateBroadcast();
-        return true;
     }
 
-    public boolean prev() {
+    public void prev() {
         if (mPlayState == Constants.PLAY_STATUE_NO_FILE) {
-            return false;
+            return;
         }
         mCurPlayIndex--;
         mCurPlayIndex = reviseIndex(mCurPlayIndex);
-        if (!prepare(mCurPlayIndex)) {
-            return false;
-        }
-        return replay();
+        prepare(mCurPlayIndex);
+        replay();
     }
 
-    public boolean next() {
+    public void next() {
         if (mPlayState == Constants.PLAY_STATUE_NO_FILE) {
-            return false;
+            return;
         }
         mCurPlayIndex++;
         mCurPlayIndex = reviseIndex(mCurPlayIndex);
-        if (!prepare(mCurPlayIndex)) {
-            return false;
-        }
-        return replay();
+        prepare(mCurPlayIndex);
+        replay();
     }
 
     private int reviseIndex(int index) {
@@ -310,9 +351,8 @@ public class AudioPlayController implements IMediaPlayer.OnCompletionListener, I
                 } else {
                     mCurPlayIndex = 0;
                 }
-                if (prepare(mCurPlayIndex)) {
-                    replay();
-                }
+                prepare(mCurPlayIndex);
+                replay();
                 break;
             case Constants.PLAY_MODE_SINGLE_LOOP:
                 play(mCurPlayIndex);

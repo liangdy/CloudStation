@@ -59,5 +59,7 @@ public interface SongSheetDetailContract {
         void setToolBarStatus(int offset, int maxScroll);
 
         void updateSongSheet(SongSheetDetailAdapter adapter, List<ContentBean> contentBeans);
+
+        void doPlay(ContentBean curMusic);
     }
 }

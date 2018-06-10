@@ -2,6 +2,7 @@ package com.cloud.ui.music;
 
 import android.support.annotation.NonNull;
 
+import com.cloud.service.AudioPlayServiceManager;
 import com.cloud.ui.BaseActivity;
 
 import javax.inject.Inject;
@@ -29,6 +30,8 @@ public class MusicHomePresenter implements MusicHomeContract.Presenter {
 
     @Override
     public void attachView(@NonNull MusicHomeContract.View view) {
+        AudioPlayServiceManager.getInstance().initConn();
+        AudioPlayServiceManager.getInstance().connectService();
         mMusicHomeView = view;
         mMusicHomeView.initialized();
     }

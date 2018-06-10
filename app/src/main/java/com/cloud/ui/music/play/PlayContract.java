@@ -1,7 +1,10 @@
 package com.cloud.ui.music.play;
 
+import com.cloud.model.music.ContentBean;
 import com.cloud.ui.BasePresenter;
 import com.cloud.ui.BaseView;
+
+import java.util.List;
 
 /**
  * Project: CloudStation
@@ -24,5 +27,27 @@ public interface PlayContract {
     interface Presenter extends BasePresenter<PlayContract.View> {
 
         void onBack();
+
+        void play();
+
+        void pause();
+
+        void next();
+
+        void prev();
+
+        void changeMode();
+
+        void download();
+
+        void collect();
+
+        void more();
+
+        void showList();
+        
+        ContentBean getCurMusic();
+        
+        List<ContentBean> getCurMusicList();
     }
 }

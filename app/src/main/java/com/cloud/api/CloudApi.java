@@ -8,6 +8,7 @@ import com.cloud.model.music.LastfmArtist;
 import com.cloud.model.music.Music;
 import com.cloud.model.music.RankBean;
 import com.cloud.model.music.RankDetail;
+import com.cloud.model.music.SongInfo;
 import com.cloud.model.music.SongSheet;
 import com.cloud.model.music.SongSheetCategory;
 import com.cloud.model.music.SongSheetDetail;
@@ -176,5 +177,18 @@ public class CloudApi {
         String format = "json";
         Map<String, String> params = CloudClient.getParams("method", method, "artist", artist, "api_key", api_key, "format", format);
         return CloudClient.getService().getArtistInfo(params).subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 获取歌曲信息
+     *
+     * @param song_id
+     * @return
+     */
+    public static Observable<SongInfo> getSongInfo(String song_id) {
+        CloudClient.status = 0;
+        String method = "baidu.ting.song.play";
+        Map<String, String> params = CloudClient.getParams("method", method, "songid", song_id);
+        return CloudClient.getService().getSongInfo(params).subscribeOn(Schedulers.io());
     }
 }

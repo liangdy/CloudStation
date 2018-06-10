@@ -2,7 +2,10 @@ package com.cloud.ui.music.play;
 
 import android.support.annotation.NonNull;
 
+import com.cloud.model.music.ContentBean;
 import com.cloud.ui.BaseActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,7 +28,7 @@ public class PlayPresenter implements PlayContract.Presenter {
 
     @Inject
     public PlayPresenter(BaseActivity activity) {
-        this.mActivity = activity;
+        mActivity = activity;
     }
 
     @Override
@@ -35,12 +38,67 @@ public class PlayPresenter implements PlayContract.Presenter {
     }
 
     @Override
-    public void detachView() {
-        mPlayView = null;
+    public void onBack() {
+        mActivity.finish();
     }
 
     @Override
-    public void onBack() {
-        mActivity.finish();
+    public void play() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void next() {
+
+    }
+
+    @Override
+    public void prev() {
+
+    }
+
+    @Override
+    public void changeMode() {
+
+    }
+
+    @Override
+    public void download() {
+
+    }
+
+    @Override
+    public void collect() {
+
+    }
+
+    @Override
+    public void more() {
+
+    }
+
+    @Override
+    public void showList() {
+
+    }
+
+    @Override
+    public ContentBean getCurMusic() {
+        return null;
+    }
+
+    @Override
+    public List<ContentBean> getCurMusicList() {
+        return null;
+    }
+
+    @Override
+    public void detachView() {
+        mPlayView = null;
     }
 }

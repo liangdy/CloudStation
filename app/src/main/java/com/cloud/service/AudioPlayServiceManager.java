@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import com.cloud.CloudApplication;
 import com.cloud.IMediaService;
 import com.cloud.model.music.ContentBean;
 import com.cloud.utils.Constants;
@@ -35,27 +36,55 @@ public class AudioPlayServiceManager {
     private ServiceConnection mConn;
     private IOnServiceConnectComplete mIOnServiceConnectComplete;
 
+    public static AudioPlayServiceManager getInstance() {
+        return Instance.instance;
+    }
+
     public AudioPlayServiceManager(Context mContext) {
         this.mContext = mContext;
         initConn();
     }
 
-    private void initConn() {
+    private AudioPlayServiceManager() {
+        mContext = CloudApplication.getApplication();
+    }
+
+    public void initConn() {
+        System.out.println("init connect");
         mConn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mService = IMediaService.Stub.asInterface(iBinder);
-                if (mService != null) {
+                if (mService != null && mIOnServiceConnectComplete != null) {
                     mIOnServiceConnectComplete.onServiceConnectComplete(mService);
                 }
+                //设置死亡代理
+                try {
+                    iBinder.linkToDeath(mDeathRecipient, 0);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("connect succeed");
             }
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-
             }
         };
     }
+
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            if (mService == null) {
+                return;
+            }
+            mService.asBinder().unlinkToDeath(mDeathRecipient, 0);
+            mService = null;
+            //retry connect
+            connectService();
+        }
+    };
 
     public void connectService() {
         Intent intent = new Intent(Constants.SERVICE_NAME);
@@ -79,7 +108,7 @@ public class AudioPlayServiceManager {
     }
 
     public List<ContentBean> getMusicList() {
-        List<ContentBean> musicList = new ArrayList<ContentBean>();
+        List<ContentBean> musicList = new ArrayList<>();
         try {
             if (mService != null) {
                 mService.getMusicList(musicList);
@@ -90,70 +119,64 @@ public class AudioPlayServiceManager {
         return musicList;
     }
 
-    public boolean play(int pos) {
+    public void play(int pos) {
         if (mService != null) {
             try {
-                return mService.play(pos);
+                mService.play(pos);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public boolean playById(int id) {
+    public void playById(int id) {
         if (mService != null) {
             try {
-                return mService.playById(id);
+                mService.playById(id);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public boolean rePlay() {
+    public void rePlay() {
         if (mService != null) {
             try {
-                return mService.rePlay();
+                mService.rePlay();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public boolean pause() {
+    public void pause() {
         if (mService != null) {
             try {
-                return mService.pause();
+                mService.pause();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public boolean prev() {
+    public void prev() {
         if (mService != null) {
             try {
-                return mService.prev();
+                mService.prev();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public boolean next() {
+    public void next() {
         if (mService != null) {
             try {
-                return mService.next();
+                mService.next();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     public boolean seekTo(int progress) {
@@ -295,4 +318,7 @@ public class AudioPlayServiceManager {
         mIOnServiceConnectComplete = IServiceConnect;
     }
 
+    private static class Instance {
+        private static AudioPlayServiceManager instance = new AudioPlayServiceManager();
+    }
 }

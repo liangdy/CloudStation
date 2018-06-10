@@ -1,4 +1,4 @@
-package com.cloud.ui.music.play;
+package com.cloud.ui.music.bottom;
 
 import com.cloud.injector.PerActivity;
 import com.cloud.injector.component.ApplicationComponent;
@@ -8,19 +8,19 @@ import dagger.Component;
 
 /**
  * Project: CloudStation
- * FileName: PlayComponent.java
+ * FileName: BottomControlComponent.java
  * Description:
  * Creator: ldy
  * Email: 1020118243@qq.com
- * Crete Date: 9/3/17 3:35 PM
+ * Crete Date: 12/2/17 4:05 PM
  * Editor: ldy
- * Modify Date: 9/3/17 3:35 PM
+ * Modify Date: 12/2/17 4:05 PM
  * Remark:
  */
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {
-        ActivityModule.class, PlayModule.class
+        ActivityModule.class, BottomControlModule.class
 })
-public interface PlayComponent {
-    void inject(PlayActivity activity);
+public interface BottomControlComponent {
+    void inject(BottomControlFragment fragment);
 }

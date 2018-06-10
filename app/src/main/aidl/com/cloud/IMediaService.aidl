@@ -7,12 +7,12 @@ import android.graphics.Bitmap;
 // Declare any non-default types here with import statements
 
 interface IMediaService {
-    boolean play(int pos);
-    boolean playById(int id);
-    boolean rePlay();
-    boolean pause();
-    boolean prev();
-    boolean next();
+    void play(int pos);
+    void playById(int id);
+    void rePlay();
+    void pause();
+    void prev();
+    void next();
     long duration();
     long position();
     boolean seekTo(int progress);

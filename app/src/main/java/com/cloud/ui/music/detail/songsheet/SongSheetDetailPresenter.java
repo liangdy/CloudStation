@@ -1,11 +1,13 @@
 package com.cloud.ui.music.detail.songsheet;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.cloud.R;
 import com.cloud.api.CloudApi;
 import com.cloud.model.music.ContentBean;
 import com.cloud.model.music.SongSheetDetail;
+import com.cloud.service.AudioPlayServiceManager;
 import com.cloud.ui.BaseActivity;
 import com.cloud.ui.adapter.SongSheetDetailAdapter;
 
@@ -139,6 +141,24 @@ public class SongSheetDetailPresenter implements SongSheetDetailContract.Present
     @Override
     public void onBack() {
         mActivity.finish();
+    }
+
+    int index = 0;
+
+    @Override
+    public void doPlay(ContentBean curMusic) {
+        final List<ContentBean> mCurMusicList = mSongSheetDetail.content;
+        for (int i = 0; i < mCurMusicList.size(); i++) {
+            if (curMusic == null) {
+                index = 0;
+            } else {
+                if (TextUtils.equals(curMusic.song_id, mCurMusicList.get(i).song_id)) {
+                    index = i;
+                }
+            }
+        }
+        AudioPlayServiceManager.getInstance().refreshMusicList(mCurMusicList);
+        AudioPlayServiceManager.getInstance().play(index);
     }
 
     @Override
